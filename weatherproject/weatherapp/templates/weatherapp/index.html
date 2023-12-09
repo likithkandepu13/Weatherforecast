@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+</div>
+
+<body {% if exception_occurred %} style="background-image: url('https://images.pexels.com/photos/3008509/pexels-photo-3008509.jpeg?auto=compress&cs=tinysrgb&w=1600');" {% else %} style="background-image: url('{{ image_url }}');" {% endif %}>
+
+
+<div class="container">
+        <h1 class="heading">Weather Application</h1>
+
+
+        <form method="POST">
+            {% csrf_token %}
+            <input class="input-field" type="text" name="city" placeholder="Enter City">
+
+            <button type="submit" class="btn" style="background-color: darkgreen; color: white;">Search </button>
+
+        </form>
+         <style>
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            The current weather in your location is {{ temp }}
+        </div>
+    </div>
+        <div class="weather">
+            <div class="left">
+                <h2 class="temp">{{ temp }}&#176; C</h2>
+                <h2 class="city">{{ city }}</h2>
+            </div>
+            <div class="right">
+
+                <div class="icon">
+                    <img src="http://openweathermap.org/img/w/{{ icon }}.png" width="120px" alt="Weather Icon">
+                </div>
+                <div class="condition">
+                    <p class="description">{{ description }}</p>
+                    <p class="day">{{ day }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<a  href="{% weatherapp '' %}" > Click here to login </a>
+
+
+    {% if exception_occurred %}
+    <script>
+        window.onload = function() {
+            alert("City information is not available from the Weather API");
+        }
+    </script>
+    {% endif %}
+</body>
+</html>

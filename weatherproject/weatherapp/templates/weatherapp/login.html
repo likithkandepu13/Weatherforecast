@@ -1,0 +1,50 @@
+{% extends 'index.html' %} #this is template inheritance
+{% block 'body' %}
+
+<h3 align="center" xmlns="http://www.w3.org/1999/html"> <u>Admin Login </u></h3>
+
+<form method="post" action="{% url 'checkadminlogin' %}">
+    {% csrf_token %}
+    <table align="center">
+        <tr>
+            <td>
+                  <label> Enter User Name :</label>
+
+            </td>
+          <td>
+               <input type="text" name="uname" required/>
+          </td>
+
+
+        </tr>
+        <td> </td>
+         <tr>
+        </tr>
+        <td> </td>
+         <tr>
+            <td>
+                  <label> Enter Password :</label>
+
+            </td>
+          <td>
+               <input type="password" name="pwd" required  />
+          </td>
+
+
+        </tr>
+
+
+         <tr align="center">
+            <td>
+            <input type="submit" value="Login" class="button"/>
+            </td>
+            <td>
+           <input type="reset" value="Clear" class="button"/>
+            </td>
+        </tr>
+</tr>
+    </table>
+
+</form>
+
+{% endblock %}
